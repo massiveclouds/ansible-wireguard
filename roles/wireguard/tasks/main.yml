@@ -1,0 +1,26 @@
+---
+
+ - name: 'install wireguard dependencies'
+   apt:
+     name: '{{ item }}'
+     state: 'present'
+   with_items:
+     - 'apt-transport-https'
+     - 'ca-certificates'
+
+ - name: 'add wireguard repo apt key'
+   apt_key: 
+     url: 'https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xAE33835F504A1A25'
+     id: 'E1B39B6EF6DDB96564797591AE33835F504A1A25'
+     state: 'present'
+
+ - name: 'add wireguard repository'
+   apt_repository:
+     repo: '{{ wireguard_apt_repository }}'
+     state: 'present'
+     update_cache: 'yes'
+
+ - name: 'install wireguard'
+   apt:
+     name: 'wireguard={{ wireguard_version }}'
+     state: 'present'

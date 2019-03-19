@@ -1,0 +1,15 @@
+---
+
+ - hosts: 127.0.0.1
+   become: true
+   connection: local
+ 
+   vars: 
+     - local_hostname: 'bastion.mmi-integration.com'
+     - wireguard_apt_repository: 'ppa:wireguard/wireguard'
+     - wireguard_version: '0.0.20190227-wg1~xenial'
+
+
+ 
+   roles:
+    - wireguard 
